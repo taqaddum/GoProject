@@ -1,0 +1,24 @@
+```
+GoProject
+├─build 存放编译程序
+├─doc   api文档 
+├─main  主程序包
+│  ├─component  初始化数据库、日志系统、redis等组件
+│  ├─config     配置文件解析
+│  ├─enum       定义枚举、常量
+│  │  └─opstatus    自定义用户操作状态
+│  ├─handler    控制层
+│  ├─mapper     数据持久化层
+│  ├─model      数据模型
+│  ├─router     路由api
+│  │  └─middleware  路由中间件
+│  ├─service    服务层
+│  ├─util       常用工具函数
+│  └─view       视图层
+├─resource  内嵌xml、toml等配置文件
+└─test      测试用例
+```
+
+* 项目使用wire工具实现依赖注入，注入顺序依次为component->mapper->service->handler->router
+* wire.go文件中注册实例构造器，以便于wire工具按需注入依赖
+

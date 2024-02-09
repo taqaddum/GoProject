@@ -1,0 +1,16 @@
+[database]
+dbms = 'postgres'
+host = 'localhost'
+port = 5432
+user = 'postgres'
+passwd = 'postgres'
+params = { sslMode = 'prefer', encode = 'utf-8' }
+
+[server]
+host = 'localhost'
+port = 8088
+slave = false
+
+[redis]
+host = 'localhost'
+port = 443
