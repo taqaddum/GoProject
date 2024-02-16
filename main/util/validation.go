@@ -5,12 +5,12 @@ import (
 	"errors"
 )
 
+var validate = component.NewValidator()
+
 func ValidateStruct(data ...any) error {
 	if len(data) == 0 {
 		return errors.New("传入参数不能为空")
 	}
-
-	validate := component.NewValidator()
 
 	for iter := range data {
 		if err := validate.Struct(iter); err != nil {
@@ -21,10 +21,9 @@ func ValidateStruct(data ...any) error {
 }
 
 func ValidateName(name string) error {
-	validate := component.NewValidator()
 	return validate.Var(name, "username")
 }
 
 func ValidatePasswd(passwd string) error {
-	return nil
+	return validate.Var(passwd, "password")
 }

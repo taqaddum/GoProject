@@ -10,23 +10,23 @@ type Response[R interface{ ~uint | ~int }] struct {
 	Data    any    `json:"data"`
 }
 
-func CodeWith[T opstatus.Generic](code T, data ...any) Response[T] {
+func StatusWith[T opstatus.Generic](status T, data ...any) Response[T] {
 	var temp any
 	if len(data) > 0 {
 		temp = data[0]
 	}
 
 	return Response[T]{
-		Code:    code,
-		Message: code.String(),
+		Code:    status,
+		Message: status.String(),
 		Data:    temp,
 	}
 }
 
-func Success(data ...any) Response[opstatus.Common] {
-	return CodeWith(opstatus.Ok, data...)
+func Success(data ...any) Response[opstatus.Operate] {
+	return StatusWith(opstatus.Ok, data...)
 }
 
-func Failed(data ...any) Response[opstatus.Common] {
-	return CodeWith(opstatus.Error, data...)
+func Fail(data ...any) Response[opstatus.Operate] {
+	return StatusWith(opstatus.Error, data...)
 }

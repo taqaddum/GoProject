@@ -9,6 +9,6 @@ import (
 
 func TestResponse(t *testing.T) {
 	success, _ := json.Marshal(view.Success("success"))
-	fail, _ := json.Marshal(view.Failed())
+	fail, _ := json.Marshal(view.Fail())
 	fmt.Println(string(success), string(fail))
 }

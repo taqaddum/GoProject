@@ -10,6 +10,7 @@ type database struct {
 	Host   string            `koanf:"Host"`
 	Port   uint16            `koanf:"Port"`
 	User   string            `koanf:"User"`
+	DBName string            `koanf:"dbname"`
 	Passwd string            `koanf:"passwd"`
 	Params map[string]string `koanf:"params"`
 }
@@ -29,6 +30,7 @@ func (db database) dsn() string {
 		Scheme:   db.DBMS,
 		User:     url.UserPassword(db.User, db.Passwd),
 		Host:     fmt.Sprintf("%s:%d", db.Host, db.Port),
+		Path:     db.DBName,
 		RawQuery: params.Encode(),
 	}
 	return dsn.String()

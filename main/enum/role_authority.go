@@ -1,19 +1,19 @@
 package enum
 
-type Permission uint8
+type Authority uint8
 
 const (
-	Admin Permission = iota
-	Activated
+	Admin Authority = iota + 1
+	Normal
 	Guest
 	Prohibit
 )
 
-func (p Permission) ToString() string {
+func (p Authority) ToString() string {
 	switch p {
 	case Admin:
 		return "管理员"
-	case Activated:
+	case Normal:
 		return "用户"
 	case Guest:
 		return "游客"

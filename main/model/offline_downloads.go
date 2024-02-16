@@ -5,7 +5,7 @@ type Downloads struct {
 	TaskID     int            `xorm:"PK AUTOINCR"`
 	Status     uint8          `xorm:"SMALLINT(1)"`
 	OriginID   string         `xorm:"TEXT"`
-	Kind       uint8          `xorm:"SMALLINT(1)"`
+	Kind       uint8          `xorm:"SMALLINT"`
 	TotalSize  uint           `xorm:"BIGINT"`
 	ActualSize uint           `xorm:"BIGINT"`
 	Speed      uint           `xorm:"BIGINT"`

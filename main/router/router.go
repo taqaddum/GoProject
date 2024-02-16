@@ -11,18 +11,29 @@ type AppRouter struct {
 	UserHandle handler.UserHandleFunc
 }
 
-func (app AppRouter) Start() {
-	app.userGroup()
+func (app AppRouter) Start(addr string) {
+	app.userRouter()
 
-	err := app.Engine.Run(":8080")
+	err := app.Engine.Run(addr)
 	if err != nil {
 		panic(err)
 	}
 }
 
-func (app AppRouter) userGroup() {
+func (app AppRouter) userRouter() {
 	userGroup := app.Engine.Group("/users")
 	{
-		userGroup.POST("/login", middleware.ValidLoginParams, app.UserHandle.LoginFunc)
+		userGroup.POST("/login", middleware.ValidLogin, app.UserHandle.LoginFunc)
+		userGroup.POST("/register", middleware.ValidRegister, app.UserHandle.RegisterFunc)
+		//userGroup.GET("/logout", app.UserHandle.LogoutFunc)
+		userGroup.GET("/:username", middleware.AuthJWT, app.UserHandle.GetDetailFunc)
+	}
+}
+
+func (app AppRouter) fileRouter() {
+	fileGroup := app.Engine.Group("/files")
+	{
+		fileGroup.POST("/upload", app.UserHandle.UploadFileFunc)
+		fileGroup.GET("/download", app.UserHandle.DownloadFileFunc)
 	}
 }

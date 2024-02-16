@@ -4,7 +4,8 @@ host = 'localhost'
 port = 5432
 user = 'postgres'
 passwd = 'postgres'
-params = { sslMode = 'prefer', encode = 'utf-8' }
+dbname = 'postgres'
+params = { sslmode = 'disable' }
 
 [server]
 host = 'localhost'

@@ -1,20 +1,26 @@
 package main
 
 import (
-	"bufio"
+	"GoProject/main/component"
 	_ "embed"
+	"flag"
 	"fmt"
-	"os"
 )
 
 var Version string
 
+func init() {
+	var isMigrate = *flag.Bool("migrate", true, "模型迁移，默认为true")
+	if isMigrate {
+		err := Migration(component.NewPostgres())
+		if err != nil {
+			panic(err)
+		}
+	}
+}
+
 func main() {
 	fmt.Println("当前版本号:", Version)
-	scanner := bufio.NewScanner(os.Stdin)
-
-	if scanner.Scan() {
-		str := scanner.Text()
-		fmt.Println(str)
-	}
+	app := NewApp()
+	app.Start(":8088")
 }
