@@ -1,4 +1,4 @@
-package main
+package mapper
 
 import (
 	"GoProject/main/enum"

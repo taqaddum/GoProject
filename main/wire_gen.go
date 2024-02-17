@@ -23,8 +23,8 @@ func NewApp() *router.AppRouter {
 	userService := service.NewUserService(userMapper)
 	userHandler := handler.NewUserHandler(userService)
 	appRouter := &router.AppRouter{
-		Engine:     engine,
-		UserHandle: userHandler,
+		Engine:  engine,
+		UserApi: userHandler,
 	}
 	return appRouter
 }

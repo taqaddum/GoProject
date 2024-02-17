@@ -2,6 +2,7 @@ package main
 
 import (
 	"GoProject/main/component"
+	"GoProject/main/mapper"
 	_ "embed"
 	"flag"
 	"fmt"
@@ -12,7 +13,7 @@ var Version string
 func init() {
 	var isMigrate = *flag.Bool("migrate", true, "模型迁移，默认为true")
 	if isMigrate {
-		err := Migration(component.NewPostgres())
+		err := mapper.Migration(component.NewPostgres())
 		if err != nil {
 			panic(err)
 		}

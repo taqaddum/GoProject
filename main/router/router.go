@@ -7,8 +7,9 @@ import (
 )
 
 type AppRouter struct {
-	Engine     *gin.Engine
-	UserHandle handler.UserHandleFunc
+	Engine  *gin.Engine
+	UserApi handler.UserHandleFunc
+	FileApi handler.FileHandleFunc
 }
 
 func (app AppRouter) Start(addr string) {
@@ -21,19 +22,19 @@ func (app AppRouter) Start(addr string) {
 }
 
 func (app AppRouter) userRouter() {
-	userGroup := app.Engine.Group("/users")
+	router := app.Engine.Group("/users")
 	{
-		userGroup.POST("/login", middleware.ValidLogin, app.UserHandle.LoginFunc)
-		userGroup.POST("/register", middleware.ValidRegister, app.UserHandle.RegisterFunc)
-		//userGroup.GET("/logout", app.UserHandle.LogoutFunc)
-		userGroup.GET("/:username", middleware.AuthJWT, app.UserHandle.GetDetailFunc)
+		router.POST("/login", middleware.ValidLogin, app.UserApi.LoginFunc)
+		router.POST("/register", middleware.ValidRegister, app.UserApi.RegisterFunc)
+		//router.GET("/logout", app.UserApi.LogoutFunc)
+		router.GET("/:username", middleware.AuthJWT, app.UserApi.GetDetailFunc)
 	}
 }
 
 func (app AppRouter) fileRouter() {
-	fileGroup := app.Engine.Group("/files")
+	router := app.Engine.Group("/files")
 	{
-		fileGroup.POST("/upload", app.UserHandle.UploadFileFunc)
-		fileGroup.GET("/download", app.UserHandle.DownloadFileFunc)
+		router.POST("/upload", app.FileApi.UploadFunc)
+		router.GET("/download", app.FileApi.DownloadFunc)
 	}
 }
