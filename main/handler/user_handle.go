@@ -25,7 +25,7 @@ func NewUserHandler(srv *service.UserService) *UserHandler {
 // LoginFunc
 //
 //	@Description: 用户登录api，只验证密码是否正确，其他校验通过路由中间件实现
-//	@receiver userHandle
+//	@receiver handler 用户蓝图控制层
 //	@param ctx
 func (handler UserHandler) LoginFunc(ctx *gin.Context) {
 	name := ctx.GetString("username")
@@ -39,8 +39,13 @@ func (handler UserHandler) LoginFunc(ctx *gin.Context) {
 	}
 }
 
+// RegisterFunc
+//
+//	@Description:
+//	@receiver handler 用户蓝图控制层
+//	@param ctx
 func (handler UserHandler) RegisterFunc(ctx *gin.Context) {
-	tmp, exist := ctx.Get("register_info")
+	tmp, exist := ctx.Get("register_params")
 	if !exist {
 		ctx.JSON(400, view.Fail())
 	}
