@@ -1,8 +1,7 @@
 package model
 
-type Files struct {
-	Preset
-	FileID    int
+type File struct {
+	Preset    `xorm:"extends"`
 	Name      string
 	Path      string
 	Size      int64
@@ -12,4 +11,8 @@ type Files struct {
 	FolderID  int
 	Thumbnail []byte
 	Metadata  map[string]any
+}
+
+func (File) TableName() string {
+	return "files"
 }

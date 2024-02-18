@@ -1,20 +1,20 @@
 package opstatus
 
 type Generic interface {
-	Operate | Login
+	Common | Login
 	String() string
 }
 
-type Operate uint
+type Common uint
 
 const (
-	Ok            Operate = 200
-	Error         Operate = 400
-	Unauthorized  Operate = 10301
-	InvalidParams Operate = 10302
+	Ok            Common = 200
+	Error         Common = 400
+	Unauthorized  Common = 10301
+	InvalidParams Common = 10302
 )
 
-func (c Operate) String() string {
+func (c Common) String() string {
 	switch c {
 	case Ok:
 		return "操作成功"

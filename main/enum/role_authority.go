@@ -14,7 +14,7 @@ func (p Authority) ToString() string {
 	case Admin:
 		return "管理员"
 	case Normal:
-		return "用户"
+		return "普通用户"
 	case Guest:
 		return "游客"
 	case Prohibit:

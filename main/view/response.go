@@ -23,10 +23,10 @@ func StatusWith[T opstatus.Generic](status T, data ...any) Response[T] {
 	}
 }
 
-func Success(data ...any) Response[opstatus.Operate] {
+func Success(data ...any) Response[opstatus.Common] {
 	return StatusWith(opstatus.Ok, data...)
 }
 
-func Fail(data ...any) Response[opstatus.Operate] {
+func Fail(data ...any) Response[opstatus.Common] {
 	return StatusWith(opstatus.Error, data...)
 }

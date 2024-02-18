@@ -14,6 +14,7 @@ type AppRouter struct {
 
 func (app AppRouter) Start(addr string) {
 	app.userRouter()
+	app.fileRouter()
 
 	err := app.Engine.Run(addr)
 	if err != nil {

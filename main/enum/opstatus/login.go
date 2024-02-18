@@ -16,10 +16,10 @@ func (l Login) String() string {
 	case WrongPassword:
 		return "用户名或密码错误"
 	case UnLogin:
-		return "未登录"
+		return "用户未登录"
 	case TokenExpired:
-		return "token已过期"
+		return "用户登录已过期"
 	default:
-		return "Unknown error"
+		return "unknown"
 	}
 }

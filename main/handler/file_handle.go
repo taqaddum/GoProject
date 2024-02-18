@@ -17,3 +17,11 @@ type FileHandleFunc interface {
 func NewFileHandler(srv *service.FileService) *FileHandler {
 	return &FileHandler{srvApi: srv}
 }
+
+func (f *FileHandler) UploadFunc(ctx *gin.Context) {
+
+}
+
+func (f *FileHandler) DownloadFunc(ctx *gin.Context) {
+
+}

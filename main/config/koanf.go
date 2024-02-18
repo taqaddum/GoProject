@@ -46,9 +46,8 @@ func init() {
 			}
 			os.Exit(0)
 		}
-		//解析settings.toml文件并反序列化到结构体
-		parser := NewKoanf(path)
-		if err := parser.Unmarshal("", &conf); err != nil {
+		//解析settings.toml文件
+		if err := parse(NewKoanf(path)); err != nil {
 			log.Fatalf("配置文件解析错误 %s", err.Error())
 		}
 	}(resource.Settings) //执行程序

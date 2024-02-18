@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 )
 
-func NewFile(path string, data []byte) {
+func CreateFile(path string, data []byte) {
 	dir := filepath.Dir(path)
 	if err := os.MkdirAll(dir, 0664); err != nil {
 		slog.Error("创建目录失败！", err.Error())

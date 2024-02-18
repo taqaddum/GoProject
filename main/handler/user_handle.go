@@ -30,7 +30,7 @@ func NewUserHandler(srv *service.UserService) *UserHandler {
 func (handler UserHandler) LoginFunc(ctx *gin.Context) {
 	name := ctx.GetString("username")
 	passwd := ctx.GetString("password")
-	token := handler.srvApi.LoginByName(name, passwd)
+	token := handler.srvApi.Login(name, passwd)
 
 	if len(token) > 0 {
 		ctx.JSON(200, view.Success(gin.H{"authorization": token}))

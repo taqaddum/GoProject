@@ -12,5 +12,6 @@ func NewRouter() *gin.Engine {
 	onceRouter.Do(func() {
 		router = gin.Default()
 	})
+
 	return router
 }
