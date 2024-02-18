@@ -25,5 +25,5 @@ func ValidRegister(ctx *gin.Context) {
 		slog.Error(err.Error())
 		return
 	}
-	ctx.Set("register_info", reg)
+	ctx.Set("register_params", reg)
 }
