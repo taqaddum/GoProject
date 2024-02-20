@@ -1,13 +1,16 @@
 package service
 
-import "GoProject/main/mapper"
+import (
+	"GoProject/main/mapper"
+	"mime/multipart"
+)
 
 type FileService struct {
 	mapApi mapper.FileMapApi
 }
 
 type FileSrvApi interface {
-	Upload()
+	Upload(file *multipart.FileHeader) error
 	Download()
 }
 
@@ -16,12 +19,12 @@ func NewFileService(fileMapper *mapper.FileMapper) *FileService {
 	return &FileService{mapApi: fileMapper}
 }
 
-func (f FileService) Upload() {
+func (srv FileService) Upload(file *multipart.FileHeader) error {
 	//TODO implement me
 	panic("implement me")
 }
 
-func (f FileService) Download() {
+func (srv FileService) Download() {
 	//TODO implement me
 	panic("implement me")
 }

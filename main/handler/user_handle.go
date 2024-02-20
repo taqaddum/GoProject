@@ -69,8 +69,8 @@ func (handler UserHandler) GetDetailFunc(ctx *gin.Context) {
 	name := ctx.Param("username")
 	if name != ctx.GetString("username") {
 		ctx.JSON(400, view.StatusWith(opstatus.Unauthorized))
-		return
+	} else {
+		result := handler.srvApi.GetDetail(name)
+		ctx.JSON(200, view.Success(result))
 	}
-	result := handler.srvApi.GetDetail(name)
-	ctx.JSON(200, view.Success(result))
 }
