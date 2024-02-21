@@ -27,6 +27,6 @@ func Success(data ...any) Response[opstatus.Common] {
 	return StatusWith(opstatus.Ok, data...)
 }
 
-func Fail(data ...any) Response[opstatus.Common] {
-	return StatusWith(opstatus.Error, data...)
+func Fail() Response[opstatus.Common] {
+	return StatusWith(opstatus.Error)
 }

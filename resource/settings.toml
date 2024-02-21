@@ -7,10 +7,12 @@ passwd = 'postgres'
 dbname = 'postgres'
 params = { sslmode = 'disable' }
 
+#服务器配置
 [server]
 host = 'localhost'
 port = 8088
-slave = false
+#用户文件存储目录
+savedir = '/www'
 
 [redis]
 host = 'localhost'

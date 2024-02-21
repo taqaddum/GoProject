@@ -1,7 +1,7 @@
 package config
 
 type server struct {
-	host  string `koanf:"Host"`
-	port  uint16 `koanf:"Port"`
-	salve bool   `koanf:"slave"`
+	Host    string `koanf:"host"`
+	Port    uint16 `koanf:"port"`
+	SaveDir string `koanf:"savedir"`
 }

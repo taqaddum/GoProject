@@ -1,7 +1,7 @@
 package opstatus
 
 type Generic interface {
-	Common | Login
+	Common | Login | File
 	String() string
 }
 

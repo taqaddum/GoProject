@@ -4,7 +4,6 @@ import (
 	"GoProject/main/enum/opstatus"
 	"GoProject/main/service"
 	"GoProject/main/view"
-	"errors"
 	"github.com/gin-gonic/gin"
 	"log/slog"
 )
@@ -26,16 +25,17 @@ func (handle *FileHandler) UploadFunc(ctx *gin.Context) {
 	file, err := ctx.FormFile("file")
 	if err != nil {
 		ctx.JSON(400, view.StatusWith(opstatus.InvalidParams))
-		slog.Error("upload file error", err.Error())
-	} else {
-		err = handle.srvApi.Upload(file)
+		slog.Error("文件上传参数错误", err.Error())
+		return
 	}
 
-	switch {
-	case errors.Is(err, nil):
-		ctx.JSON(200, view.Success())
-
+	err = handle.srvApi.SaveFile("admin", file)
+	if err != nil {
+		ctx.JSON(400, view.StatusWith(opstatus.UploadFileError))
+		return
 	}
+
+	ctx.JSON(200, view.Success())
 }
 
 func (handle *FileHandler) DownloadFunc(ctx *gin.Context) {

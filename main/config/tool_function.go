@@ -22,3 +22,7 @@ func GetDSN() string {
 func GetDBMS() string {
 	return conf.DB.DBMS
 }
+
+func GetSaveDir() string {
+	return conf.Ser.SaveDir
+}
