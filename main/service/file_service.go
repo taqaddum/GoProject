@@ -29,20 +29,17 @@ func (srv FileService) SaveFile(owner string, f *multipart.FileHeader) error {
 	defer src.Close()
 	if err != nil {
 		slog.Error("文件流错误", err.Error())
-		return err
 	}
 
 	dir := filepath.Join(config.GetSaveDir(), owner, time.Now().Format("20060102"))
-
 	err = util.CopyFile(src, dir, f.Filename)
 	if err != nil {
 		slog.Error("文件上传异常", err.Error())
-		return err
 	}
 
 	// TODO 需要计算hash，存入files表
 
-	return nil
+	return err
 }
 
 func (srv FileService) SendFile() {
