@@ -1,4 +1,4 @@
-package opstatus
+package httpstatus
 
 type Generic interface {
 	Common | Login | File

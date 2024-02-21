@@ -1,7 +1,7 @@
 package view
 
 import (
-	"GoProject/main/enum/opstatus"
+	"GoProject/main/enum/httpstatus"
 )
 
 type Response[R interface{ ~uint | ~int }] struct {
@@ -10,7 +10,7 @@ type Response[R interface{ ~uint | ~int }] struct {
 	Data    any    `json:"data"`
 }
 
-func StatusWith[T opstatus.Generic](status T, data ...any) Response[T] {
+func StatusWith[T httpstatus.Generic](status T, data ...any) Response[T] {
 	var temp any
 	if len(data) > 0 {
 		temp = data[0]
@@ -23,10 +23,10 @@ func StatusWith[T opstatus.Generic](status T, data ...any) Response[T] {
 	}
 }
 
-func Success(data ...any) Response[opstatus.Common] {
-	return StatusWith(opstatus.Ok, data...)
+func Success(data ...any) Response[httpstatus.Common] {
+	return StatusWith(httpstatus.Ok, data...)
 }
 
-func Fail() Response[opstatus.Common] {
-	return StatusWith(opstatus.Error)
+func Fail() Response[httpstatus.Common] {
+	return StatusWith(httpstatus.Error)
 }

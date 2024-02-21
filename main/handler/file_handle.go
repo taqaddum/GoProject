@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"GoProject/main/enum/opstatus"
+	"GoProject/main/enum/httpstatus"
 	"GoProject/main/service"
 	"GoProject/main/view"
 	"github.com/gin-gonic/gin"
@@ -24,14 +24,14 @@ func NewFileHandler(srv *service.FileService) *FileHandler {
 func (handle *FileHandler) UploadFunc(ctx *gin.Context) {
 	file, err := ctx.FormFile("file")
 	if err != nil {
-		ctx.JSON(400, view.StatusWith(opstatus.InvalidParams))
+		ctx.JSON(400, view.StatusWith(httpstatus.InvalidParams))
 		slog.Error("文件上传参数错误", err.Error())
 		return
 	}
 
 	err = handle.srvApi.SaveFile("admin", file)
 	if err != nil {
-		ctx.JSON(400, view.StatusWith(opstatus.UploadFileError))
+		ctx.JSON(400, view.StatusWith(httpstatus.UploadFileError))
 		return
 	}
 

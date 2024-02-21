@@ -1,7 +1,7 @@
 package handler
 
 import (
-	"GoProject/main/enum/opstatus"
+	"GoProject/main/enum/httpstatus"
 	"GoProject/main/model"
 	"GoProject/main/service"
 	"GoProject/main/view"
@@ -35,7 +35,7 @@ func (handler UserHandler) LoginFunc(ctx *gin.Context) {
 	if len(token) > 0 {
 		ctx.JSON(200, view.Success(gin.H{"authorization": token}))
 	} else {
-		ctx.JSON(400, view.StatusWith(opstatus.WrongPassword))
+		ctx.JSON(400, view.StatusWith(httpstatus.WrongPassword))
 	}
 }
 
@@ -68,7 +68,7 @@ func (handler UserHandler) RegisterFunc(ctx *gin.Context) {
 func (handler UserHandler) GetDetailFunc(ctx *gin.Context) {
 	name := ctx.Param("username")
 	if name != ctx.GetString("username") {
-		ctx.JSON(400, view.StatusWith(opstatus.Unauthorized))
+		ctx.JSON(400, view.StatusWith(httpstatus.Unauthorized))
 	} else {
 		result := handler.srvApi.GetDetail(name)
 		ctx.JSON(200, view.Success(result))
