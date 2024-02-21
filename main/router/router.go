@@ -35,7 +35,7 @@ func (app AppRouter) userRouter() {
 func (app AppRouter) fileRouter() {
 	router := app.Engine.Group("/files", middleware.AuthJWT)
 	{
-		router.POST("/upload", app.FileApi.UploadFunc)
+		router.POST("/upload", middleware.ValidFormFile, app.FileApi.UploadFunc)
 		router.GET("/download", app.FileApi.DownloadFunc)
 	}
 }
