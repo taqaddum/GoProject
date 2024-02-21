@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"GoProject/main/enum/httpstatus"
 	"GoProject/main/service"
 	"GoProject/main/view"
 	"github.com/gin-gonic/gin"
 	"log/slog"
+	"mime/multipart"
 )
 
 type FileHandler struct {
@@ -22,16 +22,18 @@ func NewFileHandler(srv *service.FileService) *FileHandler {
 }
 
 func (handle *FileHandler) UploadFunc(ctx *gin.Context) {
-	file, err := ctx.FormFile("file")
-	if err != nil {
-		ctx.JSON(400, view.StatusWith(httpstatus.InvalidParams))
-		slog.Error("文件上传参数错误", err.Error())
+	tmp, has := ctx.Get("file")
+	file := tmp.(*multipart.FileHeader)
+	if !has {
+		slog.Error("上传文件不存在")
+		ctx.JSON(400, view.Fail())
 		return
 	}
 
-	err = handle.srvApi.SaveFile("admin", file)
+	err := handle.srvApi.SaveFile("admin", file)
 	if err != nil {
-		ctx.JSON(400, view.StatusWith(httpstatus.UploadFileError))
+		ctx.JSON(500, view.Fail())
+		slog.Error(err.Error())
 		return
 	}
 
@@ -39,5 +41,4 @@ func (handle *FileHandler) UploadFunc(ctx *gin.Context) {
 }
 
 func (handle *FileHandler) DownloadFunc(ctx *gin.Context) {
-
 }
