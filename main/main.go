@@ -3,7 +3,6 @@ package main
 import (
 	"GoProject/main/component"
 	"GoProject/main/mapper"
-	_ "embed"
 	"flag"
 	"fmt"
 )
