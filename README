@@ -8,7 +8,7 @@ GoProject
 │  ├─component  初始化数据库、日志系统、redis等组件
 │  ├─config     配置文件解析
 │  ├─enum       定义枚举、常量
-│  │  └─opstatus    自定义用户操作状态
+│  │  └─httpstatus    自定义用户操作状态
 │  ├─handler    控制层
 │  ├─mapper     数据持久化层
 │  ├─model      数据模型
