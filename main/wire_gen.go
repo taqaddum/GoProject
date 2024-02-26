@@ -25,10 +25,13 @@ func NewApp() *router.AppRouter {
 	fileMapper := mapper.NewFileMapper(xormEngine)
 	fileService := service.NewFileService(fileMapper)
 	fileHandler := handler.NewFileHandler(fileService)
+	rpcService := service.NewRPCService()
+	rpcHandler := handler.NewRPCHandler(rpcService)
 	appRouter := &router.AppRouter{
 		Engine:  engine,
 		UserApi: userHandler,
 		FileApi: fileHandler,
+		RPCApi:  rpcHandler,
 	}
 	return appRouter
 }

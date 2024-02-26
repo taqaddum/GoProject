@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"GoProject/main/enum/httpstatus"
+	"GoProject/main/enum/opstatus"
 	"GoProject/main/util"
 	"GoProject/main/view"
 	"github.com/gin-gonic/gin"
@@ -21,9 +21,11 @@ func ValidRegister(ctx *gin.Context) {
 	reg.Username = strings.Trim(reg.Username, " ")
 	if err := util.ValidateStruct(&reg); err != nil {
 		ctx.Abort()
-		ctx.JSON(400, view.StatusWith(httpstatus.InvalidParams))
+		ctx.JSON(400, view.StatusWith(opstatus.InvalidParams))
 		slog.Error(err.Error())
 		return
 	}
+
 	ctx.Set("register_params", reg)
+	ctx.Next()
 }

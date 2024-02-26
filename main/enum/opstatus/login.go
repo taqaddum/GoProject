@@ -1,4 +1,4 @@
-package httpstatus
+package opstatus
 
 type Login uint
 

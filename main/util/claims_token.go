@@ -9,15 +9,15 @@ import (
 
 type ClaimsToken struct {
 	ID        int            `json:"id"`
-	Uname     string         `json:"username"`
+	Username  string         `json:"username"`
 	Authority enum.Authority `json:"authority"`
 	jwt.RegisteredClaims
 }
 
-func SignToken(id int, uname string, auth enum.Authority) string {
+func SignToken(id int, name string, auth enum.Authority) string {
 	var claims = ClaimsToken{
 		ID:        id,
-		Uname:     uname,
+		Username:  name,
 		Authority: auth,
 		RegisteredClaims: jwt.RegisteredClaims{
 			Issuer:    "admin",

@@ -6,10 +6,10 @@ import (
 )
 
 type database struct {
-	DBMS   string            `koanf:"DBMS"`
-	Host   string            `koanf:"Host"`
-	Port   uint16            `koanf:"Port"`
-	User   string            `koanf:"User"`
+	DBMS   string            `koanf:"dbms"`
+	Host   string            `koanf:"host"`
+	Port   uint16            `koanf:"port"`
+	User   string            `koanf:"user"`
 	DBName string            `koanf:"dbname"`
 	Passwd string            `koanf:"passwd"`
 	Params map[string]string `koanf:"params"`

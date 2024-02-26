@@ -19,4 +19,5 @@ func ValidLogin(ctx *gin.Context) {
 
 	ctx.Set("username", name)
 	ctx.Set("password", passwd)
+	ctx.Next()
 }

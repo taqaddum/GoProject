@@ -21,18 +21,18 @@ func NewPostgres() *xorm.Engine {
 			if err != nil || engine == nil {
 				log.Fatalf("数据库引擎初始化错误 %s", err.Error())
 			}
-			//设置数据库连接参数
 
+			//设置数据库连接参数
 			engine.SetMapper(names.GonicMapper{})
 			engine.ShowSQL(false)
 			engine.SetMaxOpenConns(100)
 			engine.SetConnMaxIdleTime(5 * time.Minute)
 			engine.SetMaxIdleConns(10)
-
-			if err := engine.Ping(); err != nil {
-				log.Fatalf("数据库连接失败 %s", err.Error())
-			}
 		})
+
+	if err := engine.Ping(); err != nil {
+		log.Fatalf("数据库连接失败 %s", err.Error())
+	}
 
 	return engine
 }

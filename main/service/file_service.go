@@ -6,6 +6,7 @@ import (
 	"GoProject/main/util"
 	"log/slog"
 	"mime/multipart"
+	"os"
 	"path/filepath"
 	"time"
 )
@@ -14,14 +15,13 @@ type FileService struct {
 	mapApi mapper.FileMapApi
 }
 
-type FileSrvApi interface {
-	SaveFile(username string, f *multipart.FileHeader) error
-	SendFile()
+func NewFileService(fileMapper *mapper.FileMapper) *FileService {
+	return &FileService{mapApi: fileMapper}
 }
 
-func NewFileService(fileMapper *mapper.FileMapper) *FileService {
-	// TODO to be continued
-	return &FileService{mapApi: fileMapper}
+type FileSrvApi interface {
+	SaveFile(username string, f *multipart.FileHeader) error
+	ObtainFile(hash string) *os.File
 }
 
 func (srv FileService) SaveFile(owner string, f *multipart.FileHeader) error {
@@ -42,7 +42,17 @@ func (srv FileService) SaveFile(owner string, f *multipart.FileHeader) error {
 	return err
 }
 
-func (srv FileService) SendFile() {
-	//TODO implement me
-	panic("implement me")
+func (srv FileService) ObtainFile(hash string) *os.File {
+	filePath := srv.mapApi.GetPathByHash(hash) // 根据哈希值获取文件路径
+	if filePath == "" {
+		slog.Error("文件不存在")
+		return nil
+	}
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		slog.Error("文件打开失败", err.Error())
+	}
+
+	return file
 }

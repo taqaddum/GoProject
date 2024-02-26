@@ -5,7 +5,7 @@ type File struct {
 	Name      string
 	Path      string
 	Size      int64
-	Md5       string
+	Hash      string
 	OriginID  string
 	UserID    int
 	FolderID  int

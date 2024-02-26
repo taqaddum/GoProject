@@ -32,6 +32,7 @@ func NewKoanf(path string) *koanf.Koanf {
 func init() {
 	var dir, _ = os.Getwd()
 	var path = *flag.String("config-path", filepath.Join(dir, "settings.toml"), "指定配置文件，若忽略使用默认配置")
+	flag.Parse()
 
 	//  @Description: 匿名函数实现配置解析
 	//  @param data 内嵌配置

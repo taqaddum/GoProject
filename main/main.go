@@ -9,18 +9,16 @@ import (
 
 var Version string
 
-func init() {
-	var isMigrate = *flag.Bool("migrate", true, "模型迁移，默认为true")
-	if isMigrate {
-		err := mapper.Migration(component.NewPostgres())
-		if err != nil {
-			panic(err)
-		}
-	}
-}
-
 func main() {
+	var autoMigrate = *flag.Bool("migrate", true, "数据结构迁移，默认为true")
+	flag.Parse()
+
+	if autoMigrate {
+		mapper.Migration(component.NewPostgres())
+	}
+
 	fmt.Println("当前版本号:", Version)
+
 	app := NewApp()
 	app.Start(":8088")
 }

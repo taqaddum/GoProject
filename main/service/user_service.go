@@ -22,7 +22,7 @@ type UserSrvApi interface {
 	GetDetail(name string) *view.UserDetailResp
 }
 
-func (srv *UserService) Login(username string, password string) string {
+func (srv UserService) Login(username string, password string) string {
 	user := srv.mapApi.GetByName(username)
 	if user != nil && util.CheckPasswd(user.Passwd, password) {
 		return util.SignToken(user.ID, user.Username, user.Authority)
@@ -30,11 +30,11 @@ func (srv *UserService) Login(username string, password string) string {
 	return ""
 }
 
-func (srv *UserService) Register(user *model.User) error {
+func (srv UserService) Register(user *model.User) error {
 	return srv.mapApi.Create(user)
 }
 
-func (srv *UserService) GetDetail(name string) *view.UserDetailResp {
+func (srv UserService) GetDetail(name string) *view.UserDetailResp {
 	user := srv.mapApi.GetByName(name)
 	if user == nil {
 		return nil

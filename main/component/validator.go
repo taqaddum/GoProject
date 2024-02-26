@@ -13,15 +13,15 @@ var validate *validator.Validate
 func NewValidator() *validator.Validate {
 	onceValidator.Do(func() {
 		validate = validator.New()
+		if err := validate.RegisterValidation("username", nameTag); err != nil {
+			slog.Warn("nameTage注册失败", "error", err)
+		}
+
+		if err := validate.RegisterValidation("password", passwordTag); err != nil {
+			slog.Warn("passwordTag注册失败", "error", err)
+		}
 	})
 
-	if err := validate.RegisterValidation("username", nameTag); err != nil {
-		slog.Warn("nameTage注册失败", "error", err)
-	}
-
-	if err := validate.RegisterValidation("password", passwordTag); err != nil {
-		slog.Warn("passwordTag注册失败", "error", err)
-	}
 	return validate
 }
 
